@@ -60,7 +60,7 @@ class fileattachmentMetabox {
 				  button: {
 					text: 'Use this media'
 				  },
-				  library: { type: 'application/pdf' }, 
+				  library: { type: 'application' }, 
 				  multiple: false  // Set to true to allow multiple files to be selected
 				});
 
@@ -125,13 +125,12 @@ class fileattachmentMetabox {
 				case 'media':
 					$upload_link = wp_get_attachment_image_src( $meta_value, 'full', true );
 					ob_start();
+					print_r($upload_link);
 					?>
 					<!-- Your image container, which can be manipulated with js -->
 					<div class="custom-img-container-<?php echo $meta_field['id'];?>">
-						<?php if ( $meta_value ) : ?>
-							<img src="<?php echo $upload_link[0] ?>" alt="" width = 70  />
-							<p><?php echo basename ( get_attached_file( $meta_value ) ) ?></p>
-						<?php endif; ?>
+						<img src="<?php echo $upload_link[0] ?>" alt="" width = 70  />
+						<p><?php echo basename ( get_attached_file( $meta_value ) ) ?></p>
 					</div>
 
 					<!-- Your add & remove image links -->
@@ -195,51 +194,4 @@ class fileattachmentMetabox {
 if (class_exists('fileattachmentMetabox')) {
 	new fileattachmentMetabox;
 };
-function filter_post_mime_types($post_mime_types) {
-	// Adding PDF to filtering dropdown
-    $post_mime_types['application/pdf'] = array(__('PDFs', 'newsletter_loreal'), __('Manage PDFs', 'newsletter_loreal'), _n_noop( 'PDF <span class="count">(%s)</span>', 'PDFs <span class="count">(%s)</span>', 'newsletter_loreal'));
-    return $post_mime_types;
-}
-add_filter('post_mime_types', 'filter_post_mime_types');
-function allow_only_pdf_media_library($mime_types) {
-	// async-upload.php is used either via media-new.php or the media uploader
-	// So testing the base URL rather than $pagenow to discriminate both
-	
-	if (basename($_SERVER['HTTP_REFERER']) == 'media-new.php' ) {//$pagenow === 'async-upload.php' &&
-		// Restrict to PDF upload only for media-new.php
-		$mime_types = array('pdf' => 'application/pdf');
-	} else {
-		// Restrict file types for the media uploader
-		$mimes_types = array(
-			'jpg|jpeg|jpe'	=> 'image/jpeg',
-			'gif' 			=> 'image/gif',
-			'png'			=> 'image/png'
-		);
-	}
-	
-    return $mime_types;
-}
-add_filter('upload_mimes', 'allow_only_pdf_media_library', 999);
-function show_only_pdf_media_library($query) {
-	global $pagenow;
-	if ($pagenow !== 'media-new.php' && $pagenow !== 'upload.php') {
-	    return $query;
-	}
-	if ($pagenow === 'upload.php') {
-		if (!current_user_can('manage_options')) {
-		    // Restricting WP Query to wanted mime type
-		    $query->set('post_mime_type', 'application/pdf' );
-			// Hiding the dropdown menu
-			echo <<<EOD
-			<script>
-				window.onload = function () {
-					document.getElementById("attachment-filter").style.display = "none";
-				};
-			</script>
-EOD;
-		}
-	}
-	return $query;
-}
-add_filter('pre_get_posts', 'show_only_pdf_media_library');
 ?>
