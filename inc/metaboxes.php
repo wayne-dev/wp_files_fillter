@@ -60,7 +60,7 @@ class fileattachmentMetabox {
 				  button: {
 					text: 'Use this media'
 				  },
-				  library: { type: 'application/pdf' },
+				  library: { type: 'application/pdf' }, 
 				  multiple: false  // Set to true to allow multiple files to be selected
 				});
 
