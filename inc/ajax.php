@@ -104,4 +104,13 @@ function wf_get_list_files() {
 	wp_send_json($page);
 	wp_die();
 }
+add_action( 'wp_ajax_wf_get_thumbnail_frame', 'wf_get_thumbnail_frame' );
+add_action( 'wp_ajax_nopriv_wf_get_thumbnail_frame', 'wf_get_thumbnail_frame' );
+function wf_get_thumbnail_frame(){
+	$upload_link = wp_get_attachment_image_src( $_POST['id'], 'full', true );
+	$name = basename ( get_attached_file( $_POST['id'] ) );
+	$page = array('url' => $upload_link[0], 'name_file' => $name);
+	wp_send_json($page);
+	wp_die();
+}
 ?>

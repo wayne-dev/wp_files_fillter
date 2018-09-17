@@ -71,8 +71,10 @@ class fileattachmentMetabox {
 				  // Get media attachment details from the frame state
 				  var attachment = frame.state().get('selection').first().toJSON();
 
-				  // Send the attachment URL to our custom image input field.
-				  imgContainer.append( '<img src="'+attachment.url+'" alt="" width = 70/>' );
+				  $.post('<?php echo admin_url( 'admin-ajax.php' );?>',{'action': 'wf_get_thumbnail_frame', 'id': attachment.id}, function(response){
+					attachment.url = response.url;
+					imgContainer.append( '<img src="'+attachment.url+'" alt="" width = 70/><p>'+response.name_file+'</p>' );
+				  });
 
 				  // Send the attachment id to our hidden input
 				  imgIdInput.val( attachment.id );
@@ -82,6 +84,8 @@ class fileattachmentMetabox {
 
 				  // Unhide the remove image link
 				  delImgLink.removeClass( 'hidden' );
+
+				  console.log(attachment);
 				});
 
 				// Finally, open the modal on click
