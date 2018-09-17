@@ -28,15 +28,15 @@ function wf_get_list_folder() {
 	$terms = get_terms($args_terms);
 	if(!empty($terms)){
 	?>
-		<ul class="list-folder" data-id-parent="<?php echo $parent ?>" data-name-parent="<?php echo $parent_name ?>">
-		<?php foreach($terms as $term){
-			?>
-			<li>	
-				<label><input type="checkbox" value="<?php echo $term->term_id; ?>" /><?php echo $term->name; ?></label>
-			</li>
-		<?php
-		} ?>
-		</ul>
+		<label><select class="list-folder" data-id-parent="<?php echo $parent ?>" data-name-parent="<?php echo $parent_name ?>">
+			<option value=""><?php _e('Choose option', 'sadecweb'); ?></option>	
+			<?php foreach($terms as $term){ ?>
+				<option value="<?php echo $term->term_id; ?>">	
+					<?php echo $term->name; ?>
+				</option>
+			<?php } ?>
+		</select>
+		</label>
 	<?php 
 	}
 	$page = array('content' => ob_get_contents());

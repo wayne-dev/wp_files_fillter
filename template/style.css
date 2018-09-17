@@ -1,0 +1,99 @@
+.container-folder .mutliSelect{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 75%;
+    float: left;
+  }
+  .container-folder label{
+    width: calc(33.3333% - 20px);
+    margin-right: 20px;
+    position: relative;
+    display: inline-flex;
+    margin-bottom: 20px;
+  }
+  .container-folder select:hover,
+  .container-folder select:focus,
+  .container-folder select {
+    width: 100%;
+    padding: 10px 15px 10px 5px;
+    border-radius: 2px !important;
+    background: #eee;
+    color: rgba(0, 0, 0, 0.5);
+    border: 0 !important;
+    font-size: 10px;
+    line-height: 14px;
+    text-transform: uppercase;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    font-weight: 500;
+  }
+  .container-folder label:after{
+    content: '';
+    background: url(images/arrow-down-sign-to-navigate.png) no-repeat;
+    background-position: center;
+    background-size: 100% auto;
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    top: 50%;
+    right: 7px;
+    transform: translatey(-50%);
+    opacity: 0.5;
+  }
+  .container-folder button {
+    background-color: #2196F3;
+    border: 0;
+    border-radius: 2px;
+    font-size: 10px;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #fff;
+    width: calc(25% - 20px);
+    float: right;
+    position: relative;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 14px;
+    text-align: left;
+  }
+  .container-folder button:after{
+    content: '';
+    background: url(images/arrow-point-to-right.png) no-repeat;
+    background-position: center;
+    background-size: 100% auto;
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    top: 50%;
+    right: 7px;
+    transform: translatey(-50%);
+  }
+  .container-folder button:disabled {
+    background-color: #ddd;
+  }
+  .container-files{
+    width: 100%;
+    float: left;
+  }
+  .container-files > ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 100%;
+  }
+  .container-files > ul li{
+    width: 100px;
+    max-width: 80%;
+  }
+  .container-files > ul li div{
+    text-align: center;
+  }
+  .container-files > ul li img{
+    padding-bottom: 10px;
+  }

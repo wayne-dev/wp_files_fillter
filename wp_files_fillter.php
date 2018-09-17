@@ -22,6 +22,7 @@ if ( ! defined( 'SD_PLUGIN_URL' ) ) {
 }
 
 	function wpff_scripts(){
+		wp_enqueue_style('wf-style', plugin_dir_url( __FILE__ ) .'/template/style.css');
 		wp_register_script('wf-script', plugin_dir_url( __FILE__ ) .'/template/js/script.js',array( 'jquery' ));
 		$global_var = array( 
 			"ajax_url" => admin_url( 'admin-ajax.php' ),
