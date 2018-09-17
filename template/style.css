@@ -44,6 +44,19 @@
     transform: translatey(-50%);
     opacity: 0.5;
   }
+  .container-folder label.loading:before{
+    content: '';
+    background: url(images/loading.svg) no-repeat;
+    background-position: center;
+    background-size: 100% auto;
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 100%;
+    top: 50%;
+    right: -30px;
+    transform: translatey(-50%);
+  }
   .container-folder button {
     background-color: #2196F3;
     border: 0;

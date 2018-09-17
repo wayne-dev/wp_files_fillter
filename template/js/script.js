@@ -10,10 +10,12 @@ jQuery(function($) {
             var _this = $(this);
             var _parent = $(this).parent();
             var parent_node_id = $(this).val();
+            _parent.addClass('loading');
             data = {'action': 'wf_get_list_folder', 'node_parent': parent_node_id,};
             $(".container-folder button").attr('data-id', parent_node_id);
             $('.container-folder button').prop('disabled', true);
             $.post(global_var.ajax_url, data, function(response){
+                _parent.removeClass('loading');
                 if(response.content.trim() != ''){
                     console.log(response.content);
                     _parent.parent().append(response.content);
