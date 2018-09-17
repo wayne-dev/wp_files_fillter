@@ -125,7 +125,6 @@ class fileattachmentMetabox {
 				case 'media':
 					$upload_link = wp_get_attachment_image_src( $meta_value, 'full', true );
 					ob_start();
-					print_r($upload_link);
 					?>
 					<!-- Your image container, which can be manipulated with js -->
 					<div class="custom-img-container-<?php echo $meta_field['id'];?>">
